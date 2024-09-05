@@ -104,7 +104,7 @@ while game_loop:
                     bounce_sound_effect.play()
 
         # scoring points
-        if ball_x < -50:
+        if ball_x < 50:
             ball_x = 640
             ball_y = 360
             ball_dy *= -1
@@ -144,7 +144,7 @@ while game_loop:
             player_1_y = 570
 
         # player 2 "Artificial Intelligence"
-        player_2_y = ball_y  + 24 
+        player_2_y = ball_y  + 25
         if player_2_y <= 0:
             player_2_y = 0
         elif player_2_y >= 570:
