@@ -48,6 +48,8 @@ ball_x = 640
 ball_y = 360
 ball_dx = 5
 ball_dy = 5
+starting_ball_dx = 5
+starting_ball_dy = 5
 
 # score
 score_1 = 0
@@ -97,7 +99,7 @@ while game_loop:
                     bounce_sound_effect.play()
 
         # ball collision with the player 2 's paddle
-        if ball_x > 1160:
+        if ball_x > 1180: #changed to 1180
             if player_2_y < ball_y + 25:
                 if player_2_y + 150 > ball_y:
                     ball_dx *= -1.1
@@ -107,15 +109,15 @@ while game_loop:
         if ball_x <= 0: #changed to  <=0
             ball_x = 640
             ball_y = 360
-            ball_dy *= -1
-            ball_dx *= -1
+            ball_dy = starting_ball_dy
+            ball_dx = starting_ball_dx
             score_2 += 1
             scoring_sound_effect.play()
         elif ball_x >= 1280: #changed to  >=1280
             ball_x = 640
             ball_y = 360
-            ball_dy *= -1
-            ball_dx *= -1
+            ball_dy = starting_ball_dy  #changed to 5
+            ball_dx = starting_ball_dx
             score_1 += 1
             scoring_sound_effect.play()
 
@@ -146,7 +148,7 @@ while game_loop:
             player_1_y = 570
 
         # player 2 "Artificial Intelligence"
-        player_2_y = ball_y  + 25 #changed
+        player_2_y = ball_y  # + 25 #changed
         if player_2_y <= 0:
             player_2_y = 0
         elif player_2_y >= 570:
