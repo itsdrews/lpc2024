@@ -93,14 +93,14 @@ while game_loop:
         if ball_x < 100:
             if player_1_y < ball_y + 25:
                 if player_1_y + 150 > ball_y:
-                    ball_dx *= -1
+                    ball_dx *= -1.1
                     bounce_sound_effect.play()
 
         # ball collision with the player 2 's paddle
         if ball_x > 1160:
             if player_2_y < ball_y + 25:
                 if player_2_y + 150 > ball_y:
-                    ball_dx *= -1
+                    ball_dx *= -1.1
                     bounce_sound_effect.play()
 
         # scoring points
@@ -144,7 +144,7 @@ while game_loop:
             player_1_y = 570
 
         # player 2 "Artificial Intelligence"
-        player_2_y = ball_y - 100 #changess
+        player_2_y = ball_y  #consigo ganhar se for +25
         if player_2_y <= 0:
             player_2_y = 0
         elif player_2_y >= 570:
