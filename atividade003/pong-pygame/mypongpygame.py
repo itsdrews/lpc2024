@@ -10,7 +10,7 @@ pygame.init()
 COLOR_BLACK = (0, 0, 0)
 COLOR_WHITE = (255, 255, 255)
 
-SCORE_MAX = 2
+SCORE_MAX = 5
 
 size = (1280, 720)
 screen = pygame.display.set_mode(size)
@@ -50,6 +50,7 @@ ball_dx = 5
 ball_dy = 5
 starting_ball_dx = 5
 starting_ball_dy = 5
+
 
 # score
 score_1 = 0
@@ -92,18 +93,24 @@ while game_loop:
             bounce_sound_effect.play()
 
         # ball collision with the player 1 's paddle
-        if ball_x < 100:
-            if player_1_y < ball_y + 25:
+        if ball_x <= 100:
+            if player_1_y < ball_y + 20:
                 if player_1_y + 150 > ball_y:
                     ball_dx *= -1.1
+                    hit_y = ((ball_y - player_1_y)/150)
+                    ball_dy *= hit_y
                     bounce_sound_effect.play()
 
         # ball collision with the player 2 's paddle
-        if ball_x > 1180: #changed to 1180
-            if player_2_y < ball_y + 25:
+        if ball_x >= 1160:
+            if player_2_y < ball_y + 20:
                 if player_2_y + 150 > ball_y:
                     ball_dx *= -1.1
+                    hit_y =  ((ball_y - player_1_y) / 150)
+                    ball_dy *= hit_y
+
                     bounce_sound_effect.play()
+
 
         # scoring points
         if ball_x <= 0: #changed to  <=0
@@ -148,7 +155,7 @@ while game_loop:
             player_1_y = 570
 
         # player 2 "Artificial Intelligence"
-        player_2_y = ball_y  # + 25 #changed
+        player_2_y =  ball_y
         if player_2_y <= 0:
             player_2_y = 0
         elif player_2_y >= 570:
@@ -162,11 +169,14 @@ while game_loop:
         screen.blit(player_1, (50, player_1_y))
         screen.blit(player_2, (1180, player_2_y))
         screen.blit(score_text, score_text_rect)
+
+
     else:
         # drawing victory
         screen.fill(COLOR_BLACK)
         screen.blit(score_text, score_text_rect)
         screen.blit(victory_text, victory_text_rect)
+
 
     # update screen
     pygame.display.flip()
