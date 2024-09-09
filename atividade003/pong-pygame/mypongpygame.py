@@ -176,7 +176,7 @@ while game_loop:
             player_1_y = 570
 
         # player 2 "Artificial Intelligence"
-        if ball_x > 0.6 * 1280:
+        if ball_x > 0.5 * 1280:
             player_2_speed = 5
             if ball_y > player_2_y:
 
