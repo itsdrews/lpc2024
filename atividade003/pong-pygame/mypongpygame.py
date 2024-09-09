@@ -105,7 +105,7 @@ while game_loop:
                     reflection_angle = normalized_distance * maximum_reflection_angle
                     angle_rad = math.radians(reflection_angle)
                     ball_dx *= -1.1
-                    ball_dy *= (math.sin(angle_rad))
+                    ball_dy *= 2*math.sin(angle_rad)
                     bounce_sound_effect.play()
 
 
@@ -121,7 +121,7 @@ while game_loop:
                     reflection_angle = normalized_distance * maximum_reflection_angle
                     angle_rad = math.radians(reflection_angle)
                     ball_dx *= -1.1
-                    ball_dy *= math.sin(angle_rad)
+                    ball_dy *= 2*math.sin(angle_rad)
                     bounce_sound_effect.play()
 
 
@@ -170,8 +170,13 @@ while game_loop:
             player_1_y = 570
 
         # player 2 "Artificial Intelligence"
-        player_2_speed = 5
-        player_2_y =  ball_y * random.uniform(0.8,1.2)
+        if ball_x > 0.5 * 1280:
+            player_2_speed = 5
+            if ball_y > player_2_y:
+
+                player_2_y += player_2_speed * random.uniform(0.8,1.2)
+            else:
+                player_2_y -= player_2_speed * random.uniform(0.8,1.2)
 
         if player_2_y <= 0:
             player_2_y = 0
