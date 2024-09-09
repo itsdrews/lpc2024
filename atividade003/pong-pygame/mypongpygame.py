@@ -1,9 +1,10 @@
 # Jucimar Jr
 # 2024
-# Nome: Victor Andrews Viana Rodrigues / Matrícula:
+# Nome: Victor Andrews Viana Rodrigues / Matrícula:2415310055
 
 import pygame
-
+import math
+import random
 
 pygame.init()
 
@@ -96,20 +97,34 @@ while game_loop:
         if ball_x <= 100:
             if player_1_y < ball_y + 20:
                 if player_1_y + 150 > ball_y:
+                    paddle_center_y = player_1_y + 150 / 2
+                    collision_y = ball_y
+                    distance_from_center = collision_y - paddle_center_y
+                    normalized_distance = distance_from_center/(75)
+                    maximum_reflection_angle = 75
+                    reflection_angle = normalized_distance * maximum_reflection_angle
+                    angle_rad = math.radians(reflection_angle)
                     ball_dx *= -1.1
-                    hit_y = ((ball_y - player_1_y)/150)
-                    ball_dy *= hit_y
+                    ball_dy *= (math.sin(angle_rad))
                     bounce_sound_effect.play()
+
 
         # ball collision with the player 2 's paddle
         if ball_x >= 1160:
             if player_2_y < ball_y + 20:
                 if player_2_y + 150 > ball_y:
+                    paddle_center_y = player_2_y + 150 / 2
+                    collision_y = ball_y
+                    distance_from_center = collision_y - paddle_center_y
+                    normalized_distance = distance_from_center / (75)
+                    maximum_reflection_angle = 75
+                    reflection_angle = normalized_distance * maximum_reflection_angle
+                    angle_rad = math.radians(reflection_angle)
                     ball_dx *= -1.1
-                    hit_y =  ((ball_y - player_1_y) / 150)
-                    ball_dy *= hit_y
-
+                    ball_dy *= math.sin(angle_rad)
                     bounce_sound_effect.play()
+
+
 
 
         # scoring points
@@ -155,7 +170,9 @@ while game_loop:
             player_1_y = 570
 
         # player 2 "Artificial Intelligence"
-        player_2_y =  ball_y
+        player_2_speed = 5
+        player_2_y =  ball_y * random.uniform(0.8,1.2)
+
         if player_2_y <= 0:
             player_2_y = 0
         elif player_2_y >= 570:
